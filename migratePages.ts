@@ -1,10 +1,8 @@
 {
-  const nodeFetch = require('node-fetch')
-  const HubSpotClient = require('hubspot-api')
-  const config = require('./config.json')
-  const hsOrigin = new HubSpotClient({ hapikey: config.origin.apiKey })
-
+  const CommonMethods = require('./class/CommonMethods.js')
+  const $ = new CommonMethods()
   const replaceUniqueStr = require('./modules/replaceUniqueStr.js')
+  const hsOrigin = new $.HubSpotClient({ hapikey: $.config.origin.apiKey })
 
   // 全ページを配列として取得
   async function getAllOriginPages() {
@@ -19,11 +17,11 @@
   }
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
-  createPageUrl.searchParams.set('hapikey', config.target.apiKey)
+  createPageUrl.searchParams.set('hapikey', $.config.target.apiKey)
   function createOrUpdatePage(pages: any[], i: number): boolean | void {
     if (i === pages.length) return false
 
-    nodeFetch(createPageUrl.href, {
+    $.fetch(createPageUrl.href, {
       method: 'post',
       body: JSON.stringify(pages[i]),
       headers: { 'Content-Type': 'application/json' },
