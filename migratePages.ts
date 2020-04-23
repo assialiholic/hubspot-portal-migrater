@@ -4,6 +4,8 @@
   const config = require('./config.json')
   const hsOrigin = new HubSpotClient({ hapikey: config.origin.apiKey })
 
+  const replaceUniqueStr = require('./modules/replaceUniqueStr.js')
+
   // 全ページを配列として取得
   async function getAllOriginPages() {
     const res: { [key: string]: any } = await hsOrigin.pages.getPages({
@@ -14,15 +16,6 @@
       limit: total,
     })
     return allRes.objects
-  }
-
-  // ポータルIDとホストをターゲットポータルのものに書き換える
-  async function replaceUniqueStr() {
-    const allPageArray: { [key: string]: any }[] = await getAllOriginPages()
-    const replacedStr = JSON.stringify(allPageArray)
-      .replace(new RegExp(config.origin.pid, 'g'), config.target.pid)
-      .replace(new RegExp(config.origin.host, 'g'), config.target.host)
-    return JSON.parse(replacedStr)
   }
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
@@ -46,7 +39,7 @@
     }, 200)
   }
 
-  replaceUniqueStr()
+  replaceUniqueStr(getAllOriginPages)
     .then(res => {
       createOrUpdatePage(res, 0)
     })
