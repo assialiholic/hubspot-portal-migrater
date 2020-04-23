@@ -12,7 +12,7 @@
     const allRes: {
       [key: string]: any
     } = await hsTarget.templates.getTemplates({
-      limit: 5,
+      limit: total,
     })
     return allRes.objects
   }
