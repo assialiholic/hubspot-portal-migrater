@@ -20,12 +20,12 @@
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
   createPageUrl.searchParams.set('hapikey', config.target.apiKey)
-  function createOrUpdatePage(allPages: any[], i: number): boolean | void {
-    if (i === allPages.length) return false
+  function createOrUpdatePage(pages: any[], i: number): boolean | void {
+    if (i === pages.length) return false
 
     nodeFetch(createPageUrl.href, {
       method: 'post',
-      body: JSON.stringify(allPages[i]),
+      body: JSON.stringify(pages[i]),
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
@@ -35,7 +35,7 @@
       .catch(error => console.error(error))
 
     setTimeout(() => {
-      createOrUpdatePage(allPages, ++i)
+      createOrUpdatePage(pages, ++i)
     }, 200)
   }
 
