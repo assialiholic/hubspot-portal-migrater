@@ -6,7 +6,7 @@ class CommonMethods {
   constructor() {
     this.fetch = require('node-fetch')
     this.HubSpotClient = require('hubspot-api')
-    this.config = require('../config.json')
+    this.config = require('../../config.json')
   }
 }
 
