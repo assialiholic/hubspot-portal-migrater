@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "build": "tsc src/*.ts --outDir dist",
+    "watch": "tsc src/*.ts --outDir dist --watch",
     "format": "npx prettier --write \"**/*\" && npx eslint \"**/*.ts\""
   },
   "keywords": [],
