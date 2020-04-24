@@ -2,19 +2,7 @@
   const CommonMethods = require('./class/CommonMethods.js')
   const $ = new CommonMethods()
   const replaceUniqueStr = require('./modules/replaceUniqueStr.js')
-  const hsOrigin = new $.HubSpotClient({ hapikey: $.config.origin.apiKey })
-
-  // 全ページを配列として取得
-  async function getAllOriginPages() {
-    const res: { [key: string]: any } = await hsOrigin.pages.getPages({
-      limit: 1,
-    })
-    const total: number = res.total
-    const allRes: { [key: string]: any } = await hsOrigin.pages.getPages({
-      limit: total,
-    })
-    return allRes.objects
-  }
+  const getAllPages = require('./modules/getAllPages.js')
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
   createPageUrl.searchParams.set('hapikey', $.config.target.apiKey)
@@ -37,7 +25,7 @@
     }, 200)
   }
 
-  replaceUniqueStr(getAllOriginPages)
+  replaceUniqueStr(() => getAllPages('origin'))
     .then(res => {
       createOrUpdatePage(res, 0)
     })
