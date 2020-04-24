@@ -1,0 +1,26 @@
+{
+  "origin": { // コピー元
+    "pid": (ポータルID: number),
+    "apiKey": (APIキー: string),
+    "host": (ホスト: string 例：www.example.com)
+  },
+  "target": { // コピー先
+    "pid": (ポータルID: number),
+    "apiKey": (APIキー: string),
+    "host": (ホスト: string 例：example.hs-sites.com)
+  },
+  "replace": {
+    "template": [
+      {
+        "before": "テンプレート内の置換したい文字列",
+        "after": "テンプレート内の置換後の文字列"
+      }
+    ],
+    "page": [
+      {
+        "before": "ページ内の置換したい文字列",
+        "after": "ページ内の置換後の文字列"
+      }
+    ]
+  }
+}

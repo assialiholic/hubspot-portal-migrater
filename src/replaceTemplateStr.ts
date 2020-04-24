@@ -5,9 +5,7 @@
   const getAllTemplates = require('./modules/getAllTemplates.js')
   const updateTemplates = require('./modules/updateTemplates.js')
 
-  const replaceArr = require('./replace.json')
-
-  replaceStr(getAllTemplates, replaceArr)
+  replaceStr(getAllTemplates, $.config.replace.template)
     .then(res => {
       updateTemplates(res, 0)
     })
