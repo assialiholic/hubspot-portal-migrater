@@ -6,7 +6,7 @@
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
   createPageUrl.searchParams.set('hapikey', $.config.target.apiKey)
-  function createOrUpdatePage(pages: any[], i: number): boolean | void {
+  function createPage(pages: any[], i: number): boolean | void {
     if (i === pages.length) return false
 
     $.fetch(createPageUrl.href, {
@@ -21,13 +21,13 @@
       .catch(error => console.error(error))
 
     setTimeout(() => {
-      createOrUpdatePage(pages, ++i)
+      createPage(pages, ++i)
     }, 200)
   }
 
   replaceUniqueStr(() => getAllPages('origin'))
     .then(res => {
-      createOrUpdatePage(res, 0)
+      createPage(res, 0)
     })
     .catch(error => {
       console.error(error)
