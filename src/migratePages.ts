@@ -25,7 +25,7 @@
     }, 200)
   }
 
-  const reaplaceOption: { [key: string]: any }[] = [
+  const replaceOption: { [key: string]: any }[] = [
     {
       before: $.config.origin.pid,
       after: $.config.target.pid,
@@ -37,8 +37,8 @@
   ]
 
   getAllPages('origin')
-    .then(res => {
-      const replacedJson = replaceStr(res, reaplaceOption)
+    .then(originPages => {
+      const replacedJson = replaceStr(originPages, replaceOption)
       createPage(replacedJson, 0)
     })
     .catch(error => {
