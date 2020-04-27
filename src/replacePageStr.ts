@@ -7,6 +7,7 @@
 
   getAllPages('target')
     .then(res => {
+      $.backup(res, $.returnFileName(__filename))
       const replacedJson = replaceStr(res, $.config.replace.page)
       updatePages(replacedJson, 0)
     })

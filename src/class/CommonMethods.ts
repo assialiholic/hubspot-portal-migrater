@@ -8,6 +8,26 @@ class CommonMethods {
     this.HubSpotClient = require('hubspot-api')
     this.config = require('../../config.json')
   }
+
+  backup(data: any, prefix: string) {
+    const fs = require('fs')
+    const dirPath = '../backup'
+    const flatDate = new Date().toLocaleString('ja-jp', { timeZone: 'Asia/Tokyo' }).replace(/[\/ :]/g, '')
+
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath);
+    }
+    fs.writeFile(`${dirPath}/${prefix}-${flatDate}.json`, JSON.stringify(data, null, '  '), 'utf-8', (err) => {
+      if(err) {
+        console.log(err);
+      }
+      console.log(`Data is backuped before ${prefix}.js at ${dirPath}/${prefix}-${flatDate}.json`)
+    });
+  }
+
+  returnFileName(abPath: string) {
+    return(abPath.split('/').slice(-1)[0].replace('.js', ''))
+  }
 }
 
 module.exports = CommonMethods

@@ -18,6 +18,7 @@
 
   getAllTemplates()
     .then(res => {
+      $.backup(res, $.returnFileName(__filename))
       const replacedJson = replaceStr(res, reaplaceOption)
       updateTemplates(replacedJson, 0)
     })

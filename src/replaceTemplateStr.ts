@@ -6,6 +6,7 @@
   const updateTemplates = require('./modules/updateTemplates.js')
 
   getAllTemplates().then(res => {
+    $.backup(res, $.returnFileName(__filename))
     const replacedJson = replaceStr(res, $.config.replace.template)
     updateTemplates(replacedJson, 0)
   })
