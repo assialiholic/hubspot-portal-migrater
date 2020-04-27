@@ -3,7 +3,7 @@
   const $ = new CommonMethods()
 
   // 全ページを配列として取得
-  module.exports = async function getAllOriginPages(portal) {
+  module.exports = async function getAllPages(portal) {
     const apiKey =
       portal === 'origin' ? $.config.origin.apiKey : $.config.target.apiKey
     const hs = new $.HubSpotClient({ hapikey: apiKey })
