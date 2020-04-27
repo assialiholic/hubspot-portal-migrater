@@ -9,7 +9,7 @@ class CommonMethods {
     this.config = require('../../config.json')
   }
 
-  backup(data: any, prefix: string) {
+  backup(data: any, prefix: string, ext: string = 'json') {
     const fs = require('fs')
     const dirPath = '../backup'
     const flatDate = new Date().toLocaleString('ja-jp', { timeZone: 'Asia/Tokyo' }).replace(/[\/ :]/g, '')
@@ -17,7 +17,7 @@ class CommonMethods {
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath);
     }
-    fs.writeFile(`${dirPath}/${prefix}-${flatDate}.json`, JSON.stringify(data, null, '  '), 'utf-8', (err) => {
+    fs.writeFile(`${dirPath}/${prefix}-${flatDate}.${ext}`, JSON.stringify(data, null, '  '), 'utf-8', (err) => {
       if(err) {
         console.log(err);
       }
