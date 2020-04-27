@@ -1,7 +1,7 @@
 {
   const CommonMethods = require('./class/CommonMethods.js')
   const $ = new CommonMethods()
-  const replaceUniqueStr = require('./modules/replaceUniqueStr.js')
+  const replaceStr = require('./modules/replaceStr.js')
   const getAllPages = require('./modules/getAllPages.js')
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
@@ -25,9 +25,21 @@
     }, 200)
   }
 
-  replaceUniqueStr(() => getAllPages('origin'))
+  const reaplaceOption: { [key: string]: any }[] = [
+    {
+      before: $.config.origin.pid,
+      after: $.config.target.pid,
+    },
+    {
+      before: $.config.origin.host,
+      after: $.config.target.host,
+    },
+  ]
+
+  getAllPages('origin')
     .then(res => {
-      createPage(res, 0)
+      const replacedJson = replaceStr(res, reaplaceOption)
+      createPage(replacedJson, 0)
     })
     .catch(error => {
       console.error(error)
