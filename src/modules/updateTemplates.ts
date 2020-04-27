@@ -26,6 +26,6 @@
 
     setTimeout(() => {
       updateTemplets(temps, ++i)
-    }, 200)
+    }, 100)
   }
 }

@@ -22,7 +22,7 @@
 
     setTimeout(() => {
       createPage(pages, ++i)
-    }, 200)
+    }, 100)
   }
 
   const replaceOption: { [key: string]: any }[] = [
