@@ -21,7 +21,7 @@ class CommonMethods {
       if(err) {
         console.log(err);
       }
-      console.log(`Data is backuped before ${prefix}.js at ${dirPath}/${prefix}-${flatDate}.json`)
+      console.log(`Data is backuped before ${prefix}.js at ${dirPath}/${prefix}-${flatDate}.${ext}`)
     });
   }
 
