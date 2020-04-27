@@ -2,7 +2,10 @@
   const CommonMethods = require('../class/CommonMethods.js')
   const $ = new CommonMethods()
 
-  module.exports = function updateTemplets(temps: any[], i: number): boolean | void {
+  module.exports = function updateTemplets(
+    temps: any[],
+    i: number
+  ): boolean | void {
     if (i === temps.length) return false
 
     const endPoint = new URL(

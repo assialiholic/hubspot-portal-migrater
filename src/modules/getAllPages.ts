@@ -4,10 +4,9 @@
 
   // 全ページを配列として取得
   module.exports = async function getAllOriginPages(portal) {
-    const apiKey = portal === 'origin'
-      ? $.config.origin.apiKey
-      : $.config.target.apiKey
-    const hs = new $.HubSpotClient({hapikey: apiKey})
+    const apiKey =
+      portal === 'origin' ? $.config.origin.apiKey : $.config.target.apiKey
+    const hs = new $.HubSpotClient({ hapikey: apiKey })
     const res: { [key: string]: any } = await hs.pages.getPages({
       limit: 1,
     })
