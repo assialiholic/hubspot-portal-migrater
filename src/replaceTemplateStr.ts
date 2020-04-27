@@ -5,11 +5,11 @@
   const getAllTemplates = require('./modules/getAllTemplates.js')
   const updateTemplates = require('./modules/updateTemplates.js')
 
-  replaceStr(getAllTemplates, $.config.replace.template)
-    .then(res => {
-      updateTemplates(res, 0)
-    })
-    .catch(error => {
-      console.error(error)
-    })
+  getAllTemplates().then(res => {
+    const replacedJson = replaceStr(res, $.config.replace.template)
+    updateTemplates(replacedJson, 0)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 }
