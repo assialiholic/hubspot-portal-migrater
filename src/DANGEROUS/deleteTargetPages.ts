@@ -1,7 +1,7 @@
 {
-  const CommonMethods = require('./class/CommonMethods.js')
+  const CommonMethods = require('../class/CommonMethods.js')
   const $ = new CommonMethods()
-  const getAllPages = require('./modules/getAllPages.js')
+  const getAllPages = require('../modules/getAllPages.js')
   const hs = new $.HubSpotClient({ hapikey: $.config.target.apiKey })
 
   function deletePages(
@@ -10,7 +10,7 @@
   ): boolean | void {
     if (i === pages.length) return false
 
-    hs.pages.deletePage(pages[i].id).then(res => console.log(res.name))
+    hs.pages.deletePage(pages[i].id).then(res => console.log(res))
 
     setTimeout(() => {
       deletePages(pages, ++i)
