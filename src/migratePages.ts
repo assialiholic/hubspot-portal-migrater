@@ -2,7 +2,7 @@
   const CommonMethods = require('./class/CommonMethods.js')
   const $ = new CommonMethods()
   const replaceStr = require('./modules/replaceStr.js')
-  const getAllPages = require('./modules/getAllPages.js')
+  const getPages = require('./modules/getPages.js')
   const returnFilePathReplaceArr = require('./modules/returnFilePathReplaceArr.js')
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
@@ -27,7 +27,7 @@
   }
 
   async function returnStrReplacedJson() {
-    const originPages = await getAllPages('origin')
+    const originPages = await getPages('origin')
     const filePathArr = await returnFilePathReplaceArr()
     const replaceOption = filePathArr.concat([
       {

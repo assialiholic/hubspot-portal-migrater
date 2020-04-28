@@ -1,7 +1,7 @@
 {
   const CommonMethods = require('../class/CommonMethods.js')
   const $ = new CommonMethods()
-  const getAllPages = require('../modules/getAllPages.js')
+  const getPages = require('../modules/getPages.js')
   const hs = new $.HubSpotClient({ hapikey: $.config.target.apiKey })
 
   function deletePages(
@@ -17,7 +17,7 @@
     }, 100)
   }
 
-  getAllPages('target')
+  getPages('target')
     .then(targetPages => {
       $.backup(targetPages, $.returnFileName(__filename))
       deletePages(targetPages, 0)

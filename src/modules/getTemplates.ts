@@ -4,7 +4,7 @@
   const hsTarget = new $.HubSpotClient({ hapikey: $.config.target.apiKey })
 
   // 全テンプレートを配列として取得
-  module.exports = async function getAllTemplates() {
+  module.exports = async function getTemplates() {
     const res: { [key: string]: any } = await hsTarget.templates.getTemplates({
       limit: 1,
     })

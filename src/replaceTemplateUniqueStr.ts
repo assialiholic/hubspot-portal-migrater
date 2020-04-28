@@ -2,12 +2,12 @@
   const CommonMethods = require('./class/CommonMethods.js')
   const $ = new CommonMethods()
   const replaceStr = require('./modules/replaceStr.js')
-  const getAllTemplates = require('./modules/getAllTemplates.js')
+  const getTemplates = require('./modules/getTemplates.js')
   const updateTemplates = require('./modules/updateTemplates.js')
   const returnFilePathReplaceArr = require('./modules/returnFilePathReplaceArr.js')
 
   async function returnTempStrReplacedJson() {
-    const targetTemps = await getAllTemplates()
+    const targetTemps = await getTemplates()
     $.backup(targetTemps, $.returnFileName(__filename))
     const filePathArr = await returnFilePathReplaceArr()
     const replaceOption = filePathArr.concat([

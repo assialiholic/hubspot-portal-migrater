@@ -1,12 +1,12 @@
 {
   const CommonMethods = require('./class/CommonMethods.js')
   const $ = new CommonMethods()
-  const getAllPages = require('./modules/getAllPages.js')
+  const getPages = require('./modules/getPages.js')
   const replaceStr = require('./modules/replaceStr.js')
   const updatePages = require('./modules/updatePages.js')
 
   async function returnPageIdObj(targetPages) {
-    const originPages = await getAllPages('origin')
+    const originPages = await getPages('origin')
     let pageIdObj = {}
     originPages.forEach(page => {
       pageIdObj[page.name] = {
@@ -39,7 +39,7 @@
   }
 
   (async () => {
-    return await getAllPages('target')
+    return await getPages('target')
   })().then(targetPages => {
     updateTargetPages(targetPages)
   })
