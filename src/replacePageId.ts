@@ -10,7 +10,7 @@
     let pageIdObj = {}
     originPages.forEach(page => {
       pageIdObj[page.name] = {
-        originId: page.id
+        originId: page.id,
       }
     })
 
@@ -38,7 +38,7 @@
     updatePages(replacedJson, 0)
   }
 
-  (async () => {
+  ;(async () => {
     return await getPages('target')
   })().then(targetPages => {
     updateTargetPages(targetPages)

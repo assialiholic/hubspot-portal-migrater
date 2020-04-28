@@ -4,10 +4,7 @@
   const getPages = require('../modules/getPages.js')
   const hs = new $.HubSpotClient({ hapikey: $.config.target.apiKey })
 
-  function deletePages(
-    pages: any[],
-    i: number
-  ): boolean | void {
+  function deletePages(pages: any[], i: number): boolean | void {
     if (i === pages.length) return false
 
     hs.pages.deletePage(pages[i].id).then(res => console.log(res))

@@ -5,7 +5,9 @@
   const getTemplates = require('./modules/getTemplates.js')
   const returnFilePathReplaceArr = require('./modules/returnFilePathReplaceArr.js')
 
-  const createTempsUrl = new URL('https://api.hubapi.com/content/api/v2/templates')
+  const createTempsUrl = new URL(
+    'https://api.hubapi.com/content/api/v2/templates'
+  )
   createTempsUrl.searchParams.set('hapikey', $.config.target.apiKey)
   function createTemps(temps: any[], i: number): boolean | void {
     if (i === temps.length) return false

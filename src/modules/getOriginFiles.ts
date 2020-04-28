@@ -5,7 +5,7 @@
   endPoint.searchParams.set('hapikey', $.config.origin.apiKey)
 
   module.exports = async function getOriginFiles() {
-    async function getFiles(limit: string = '1'){
+    async function getFiles(limit: string = '1') {
       endPoint.searchParams.set('limit', limit)
       const res = await $.fetch(endPoint.href)
       return await res.json()

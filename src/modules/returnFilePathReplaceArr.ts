@@ -8,7 +8,7 @@
     const arr = allFiles.map(file => {
       return {
         before: file.url,
-        after: file.alt_url
+        after: file.alt_url,
       }
     })
     return arr
