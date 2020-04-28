@@ -3,6 +3,7 @@
   const $ = new CommonMethods()
   const replaceStr = require('./modules/replaceStr.js')
   const getAllPages = require('./modules/getAllPages.js')
+  const returnFilePathReplaceArr = require('./modules/returnFilePathReplaceArr.js')
 
   const createPageUrl = new URL('https://api.hubapi.com/content/api/v2/pages')
   createPageUrl.searchParams.set('hapikey', $.config.target.apiKey)
@@ -25,21 +26,25 @@
     }, 100)
   }
 
-  const replaceOption: { [key: string]: any }[] = [
-    {
-      before: $.config.origin.pid,
-      after: $.config.target.pid,
-    },
-    {
-      before: $.config.origin.host,
-      after: $.config.target.host,
-    },
-  ]
+  async function returnStrReplacedJson() {
+    const originPages = await getAllPages('origin')
+    const filePathArr = await returnFilePathReplaceArr()
+    const replaceOption = filePathArr.concat([
+      {
+        before: $.config.origin.pid,
+        after: $.config.target.pid,
+      },
+      {
+        before: $.config.origin.host,
+        after: $.config.target.host,
+      },
+    ])
+    return replaceStr(originPages, replaceOption)
+  }
 
-  getAllPages('origin')
-    .then(originPages => {
-      const replacedJson = replaceStr(originPages, replaceOption)
-      createPage(replacedJson, 0)
+  returnStrReplacedJson()
+    .then(json => {
+      createPage(json, 0)
     })
     .catch(error => {
       console.error(error)

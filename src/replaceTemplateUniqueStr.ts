@@ -4,25 +4,30 @@
   const replaceStr = require('./modules/replaceStr.js')
   const getAllTemplates = require('./modules/getAllTemplates.js')
   const updateTemplates = require('./modules/updateTemplates.js')
+  const returnFilePathReplaceArr = require('./modules/returnFilePathReplaceArr.js')
 
-  const reaplaceOption: { [key: string]: any }[] = [
-    {
-      before: $.config.origin.pid,
-      after: $.config.target.pid,
-    },
-    {
-      before: $.config.origin.host,
-      after: $.config.target.host,
-    },
-  ]
+  async function returnTempStrReplacedJson() {
+    const targetTemps = await getAllTemplates()
+    $.backup(targetTemps, $.returnFileName(__filename))
+    const filePathArr = await returnFilePathReplaceArr()
+    const replaceOption = filePathArr.concat([
+      {
+        before: $.config.origin.pid,
+        after: $.config.target.pid,
+      },
+      {
+        before: $.config.origin.host,
+        after: $.config.target.host,
+      },
+    ])
+    return replaceStr(targetTemps, replaceOption)
+  }
 
-  getAllTemplates()
-    .then(res => {
-      $.backup(res, $.returnFileName(__filename))
-      const replacedJson = replaceStr(res, reaplaceOption)
-      updateTemplates(replacedJson, 0)
-    })
-    .catch(error => {
-      console.error(error)
-    })
+  returnTempStrReplacedJson()
+  .then(json => {
+    updateTemplates(json, 0)
+  })
+  .catch(error => {
+    console.error(error)
+  })
 }
