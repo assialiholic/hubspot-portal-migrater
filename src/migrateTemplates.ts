@@ -46,7 +46,7 @@
 
   returnStrReplacedJson()
     .then(json => {
-      // createTemps(json, 0)
+      createTemps(json, 0)
     })
     .catch(error => {
       console.error(error)
