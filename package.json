@@ -26,6 +26,6 @@
   "dependencies": {
     "@types/node": "^13.13.2",
     "hubspot-api": "^2.15.2",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   }
 }
